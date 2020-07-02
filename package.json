@@ -1,12 +1,13 @@
 {
   "name": "gardenbot",
-  "version": "0.0.1",
-  "main": "app.js",
-  "author": "J Silverstein <jess.pebble@gmail.com>",
+  "version": "0.0.0",
+  "main": "index.js",
+  "author": "Amber (ambravl at github)",
   "license": "MIT",
   "dependencies": {
     "discord.js": "^12.2.0",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "redis": "^3.0.2"
   }
 }
