@@ -5,5 +5,7 @@
   "readAgain": "728150828141117522",
   "readAgainMsg": "728197235111886898",
   "readAgainChannel": "679455021393248256",
-  "readAgainEmoji": "\uD83D\uDC1F"
+  "readAgainEmoji": "\uD83D\uDC1F",
+  "thankLimit": "86400",
+  "starUp": [0, 5, 10, 15, 20, 25]
 }
