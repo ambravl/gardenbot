@@ -1,8 +1,9 @@
 {"prefix":  "&",
 "permissions":  ["704041010140938373", "703411313191419965","711521318557843501"],
-  "quizChannel": "723392187361919037",
-  "watererRole": "718225702364643369",
-  "readAgain": "709368961682374766",
-  "readAgainMsg": "717768656200794173",
-  "readAgainEmoji": "727700175115649054"
+  "quizChannel": "679485174605807617",
+  "watererRole": "728150828141117522",
+  "readAgain": "728150828141117522",
+  "readAgainMsg": "728197235111886898",
+  "readAgainChannel": "679455021393248256",
+  "readAgainEmoji": "\uD83D\uDC1F"
 }

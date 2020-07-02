@@ -26,10 +26,15 @@ module.exports = async (client, messageReaction, user) => {
       })
     })
   }
-
-
-  else if(messageReaction.message.id === client.cfg.readAgainMsg && messageReaction.emoji.id === client.cfg.readAgainEmoji){
-    messageReaction.message.guild.member(user).roles.remove(client.cfg.readAgain, 'Asked for forgiveness')
-      .catch((err) => {client.catch(err)});
+  else if(messageReaction.message.id === client.cfg.readAgainMsg) {
+    if (messageReaction.emoji.id === client.cfg.readAgainEmoji || messageReaction.emoji.name === client.cfg.readAgainEmoji) {
+      messageReaction.message.guild.member(user).roles.remove(client.cfg.readAgain, 'Asked for forgiveness')
+        .catch((err) => {
+          client.catch(err)
+        });
+      messageReaction.users.remove(user.id).catch((err) => {
+        client.catch(err)
+      });
+    }
   }
 };

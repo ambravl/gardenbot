@@ -1,6 +1,7 @@
 module.exports = {
   name: 'newquiz',
   description: 'Creates a new quiz question for watering verification',
+  usage: '<correct reaction> <message, including emojis of all reactions anywhere>',
   cooldown: 5,
   permLevel: 1,
   async run(client, message, args) {

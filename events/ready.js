@@ -6,5 +6,6 @@ module.exports = async (client) => {
       channel.messages.fetch(messageID).then(()=>{console.log(`fetched ${messageID}`)})
     })
   });
+  client.channels.resolve(client.cfg.readAgainChannel).messages.fetch(client.cfg.readAgainMsg).catch((err) => {client.catch(err)});
   console.log('ready')
 };
