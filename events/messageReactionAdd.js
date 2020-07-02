@@ -9,18 +9,19 @@ module.exports = async (client, messageReaction, user) => {
     client.db.hget('quiz', messageReaction.message.id, function(err, rightAnswer){
       if(err) return client.catch(err);
       if(messageReaction.emoji.id !== rightAnswer && messageReaction.emoji.name !== rightAnswer){
-        client.db.zremrangebyscore(`users:${user.id}`, 1000, '+inf');
+        client.db.del(`quiz:${user.id}`);
         member.roles.add(client.cfg.readAgain);
         return;
       }
-      client.db.zadd(`users:${user.id}`, messageReaction.message.id, messageReaction.message.id, function (err, res) {
+      client.db.sadd(`quiz:${user.id}`, messageReaction.message.id, function (err, res) {
         if(err) return client.catch(err);
         if(res === 0) return;
-        client.db.zcard(`users:${user.id}`, function(err, userCardinality) {
+        client.db.scard(`quiz:${user.id}`, function(err, userCardinality) {
           if(err) return client.catch(err);
           client.db.hlen('quiz', function(err, quizCardinality) {
             if(err) return client.catch(err);
             if(userCardinality >= quizCardinality) member.roles.add(client.cfg.watererRole);
+            client.db.expire(`quiz:${user.id}`, 3600)
           })
         })
       })
