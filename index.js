@@ -6,15 +6,31 @@ const Discord = require('discord.js');
 const client = new Discord.Client(
   {presence: { activity: { name: "everyone", type: 'LISTENING' }}});
 
-const redis = require('redis');
-client.db = redis.createClient(process.env.REDISTOGO_URL, {no_ready_check: true});
-client.cfg = require('./config.json');
-client.commands = new Discord.Collection();
-client.cooldowns = new Discord.Collection();
-require('./functions')(client);
 const handler = require('./handler');
 client.catch = handler.handle;
 client.error = handler.error;
+
+const redis = require('redis');
+client.db = redis.createClient(process.env.REDISTOGO_URL, {no_ready_check: true});
+client.db.hgetall('config', (err, res) => {
+  if(err) client.catch(err);
+  client.cfg = res;
+});
+
+client.db.lrange('config:perms', 0, -1, (err, res) => {
+  if(err) client.catch(err);
+  client.cfg.permissions = res;
+});
+
+client.db.lrange('config:stars', 0, -1, (err, res) => {
+  if(err) client.catch(err);
+  client.cfg.starUp = res;
+});
+
+
+client.commands = new Discord.Collection();
+client.cooldowns = new Discord.Collection();
+require('./functions')(client);
 
 fs.readdirSync('./commands').filter(file => file.endsWith('.js')).forEach((file) => {
   const command = require(`./commands/${file}`);
