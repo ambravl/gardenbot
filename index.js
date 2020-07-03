@@ -14,17 +14,17 @@ const redis = require('redis');
 client.db = redis.createClient(process.env.REDISTOGO_URL, {no_ready_check: true});
 client.db.hgetall('config', (err, res) => {
   if(err) client.catch(err);
-  client.cfg = res;
-});
+  client.cfg = res || {};
 
-client.db.lrange('config:perms', 0, -1, (err, res) => {
-  if(err) client.catch(err);
-  client.cfg.permissions = res;
-});
+  client.db.lrange('config:perms', 0, -1, (err, res) => {
+    if(err) client.catch(err);
+    client.cfg.permissions = res;
+  });
 
-client.db.lrange('config:stars', 0, -1, (err, res) => {
-  if(err) client.catch(err);
-  client.cfg.starUp = res;
+  client.db.lrange('config:stars', 0, -1, (err, res) => {
+    if(err) client.catch(err);
+    client.cfg.starUp = res;
+  });
 });
 
 
