@@ -1,11 +1,16 @@
 module.exports = async (client) => {
   client.db.hkeys('quiz', function(err, res) {
     if(err) return client.catch(err);
-    const channel = client.channels.resolve(client.cfg.quizChannel);
-    res.forEach((messageID) => {
-      channel.messages.fetch(messageID).then(()=>{console.log(`fetched ${messageID}`)})
+    if(!res || !client.cfg.quizChannel) return;
+    client.channels.fetch(client.cfg.quizChannel).then((channel) => {
+      if(!channel) return;
+      res.forEach((messageID) => {
+        channel.messages.fetch(messageID).then(() => {
+          console.log(`fetched ${messageID}`)
+        })
+      })
     })
   });
-  client.channels.resolve(client.cfg.readAgainChannel).messages.fetch(client.cfg.readAgainMsg).catch((err) => {client.catch(err)});
-  console.log('ready')
+  if(client.cfg.readAgainChannel) client.channels.resolve(client.cfg.readAgainChannel).messages.fetch(client.cfg.readAgainMsg).catch((err) => {client.catch(err)});
+  console.log('ready');
 };
