@@ -1,0 +1,79 @@
+{
+  "types": {
+    "common": [
+      "dodo",
+      "shop",
+      "location",
+      "water",
+      "other",
+      "timeout"
+    ],
+    "turnip": [
+      "price",
+      "multirun"
+    ],
+    "diy": [
+      "recipe",
+      "villager"
+    ],
+    "visitor": ["visitors"]
+  },
+  "dodo": {
+    "title": "Dodo Code:",
+    "regex": "(?<dodo>dodo.*?)",
+    "required": false,
+    "default": "DM"
+  },
+  "shop": {
+    "title": "Shopping Allowed?",
+    "regex": "(?<shop>.*?shop.*?)",
+    "required": false,
+    "default": "No"
+  },
+  "location": {
+    "title": "Location:",
+    "regex": "(?<location>location|place)",
+    "required": false
+  },
+  "water": {
+    "title": "Need Watering?",
+    "regex": "(?<water>(?:needs? )?water.*?)",
+    "required": false,
+    "default": "No"
+  },
+  "other": {
+    "title": "Notes:",
+    "regex": "(?<other>others?|etc|notes?|misc)",
+    "required": false
+  },
+  "timeout": {
+    "regex": "(?<timeout>timeout|expiration|exp)",
+    "required": false
+  },
+  "price": {
+    "title": "Turnip Price:",
+    "regex": "(?<price>turnips? prices?)",
+    "required": true
+  },
+  "multirun": {
+    "title": "Multiple Trips Allowed?",
+    "regex": "(?<multirun>multiple trips|multi|multiruns?|multi-runs?)",
+    "required": false,
+    "default": "No"
+  },
+  "recipe": {
+    "title": "DIY Recipe:",
+    "regex": "(?<recipe>diy (?:recipe))",
+    "required": true
+  },
+  "villager": {
+    "title": "Villager:",
+    "regex": "(?<villager>villager|crafter)",
+    "required": true
+  },
+  "visitors": {
+    "title": "Visitor(s):",
+    "regex": "(?<visitors>visitor(?:(s)))",
+    "required": true
+  }
+}
